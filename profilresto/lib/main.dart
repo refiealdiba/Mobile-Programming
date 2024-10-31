@@ -123,8 +123,8 @@ class MainApp extends StatelessWidget {
                   ],
                 ),
               ),
-              const AnimatedContainerExample(title: 'Burger'),
-              const AnimatedContainerExample(title: 'Drink'),
+              const BurgerAnimated(title: 'Burger'),
+              const DrinkAnimated(title: 'Drink'),
               Container(
                 margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 padding: EdgeInsets.fromLTRB(20, 50, 20, 0),
@@ -272,17 +272,16 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class AnimatedContainerExample extends StatefulWidget {
+class BurgerAnimated extends StatefulWidget {
   final String title;
 
-  const AnimatedContainerExample({super.key, required this.title});
+  const BurgerAnimated({super.key, required this.title});
 
   @override
-  State<AnimatedContainerExample> createState() =>
-      _AnimatedContainerExampleState();
+  State<BurgerAnimated> createState() => _BurgerAnimatedState();
 }
 
-class _AnimatedContainerExampleState extends State<AnimatedContainerExample> {
+class _BurgerAnimatedState extends State<BurgerAnimated> {
   bool selected = false;
 
   @override
@@ -414,6 +413,145 @@ class _AnimatedContainerExampleState extends State<AnimatedContainerExample> {
                           ),
                           Text(
                             "McDouble",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.yellow[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )),
+    );
+  }
+}
+
+class DrinkAnimated extends StatefulWidget {
+  final String title;
+
+  const DrinkAnimated({super.key, required this.title});
+
+  @override
+  State<DrinkAnimated> createState() => _DrinkAnimatedState();
+}
+
+class _DrinkAnimatedState extends State<DrinkAnimated> {
+  bool selected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selected = !selected;
+        });
+      },
+      child: AnimatedContainer(
+          // width: selected ? 400.0 : 400.0,
+          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7),
+              color: const Color.fromRGBO(182, 0, 0, 1),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromRGBO(60, 64, 67, 0.3),
+                  blurRadius: 2,
+                  spreadRadius: 0,
+                  offset: Offset(
+                    0,
+                    1,
+                  ),
+                ),
+                BoxShadow(
+                  color: Color.fromRGBO(60, 64, 67, 0.15),
+                  blurRadius: 3,
+                  spreadRadius: 1,
+                  offset: Offset(
+                    0,
+                    1,
+                  ),
+                ),
+              ]),
+          width: 350.0,
+          height: selected ? 200.0 : 50.0,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeIn,
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Text(
+                  widget.title,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.yellow[600],
+                  ),
+                ),
+              ),
+              AnimatedOpacity(
+                opacity: selected ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.easeIn,
+                child: Wrap(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                      visible: selected,
+                      child: Column(
+                        children: [
+                          Image(
+                            image: AssetImage('assets/Caramel Mocha.png'),
+                            width: 100,
+                            height: 100,
+                          ),
+                          Text(
+                            "Caramel Mocha",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.yellow[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Visibility(
+                      visible: selected,
+                      child: Column(
+                        children: [
+                          Image(
+                            image: AssetImage('assets/Frozen CocaCola.png'),
+                            width: 100,
+                            height: 100,
+                          ),
+                          Text(
+                            "Frozen CocaCola",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.yellow[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Visibility(
+                      visible: selected,
+                      child: Column(
+                        children: [
+                          Image(
+                            image: AssetImage('assets/Dr Pepper.png'),
+                            width: 100,
+                            height: 100,
+                          ),
+                          Text(
+                            "Dr Pepper",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
